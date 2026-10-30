@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://SEU-ENDERECO/sitemap.xml
+Sitemap: https://andromeda/sitemap.xml

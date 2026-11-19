@@ -1,188 +1,473 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-MZ">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Andrômeda Gestão Financeira | Gestão financeira e patrimonial para empresas</title>
-<meta name="description" content="A Andrômeda é uma solução de gestão financeira e patrimonial para empresas em Moçambique. Organiza receitas, despesas, património e obrigações fiscais num só lugar.">
-<meta property="og:title" content="Andrômeda Gestão Financeira">
-<meta property="og:description" content="Gestão inteligente para empresas que querem crescer.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ccircle cx=%2750%27 cy=%2750%27 r=%2748%27 fill=%27%230B1A3D%27/%3E%3Cpath d=%27M50 12C52 36 56 44 80 50C56 56 52 64 50 88C48 64 44 56 20 50C44 44 48 36 50 12Z%27 fill=%27%23E6B53C%27/%3E%3C/svg%3E">
+<title>Andrômeda</title>
+<meta name="description" content="Andrômeda é uma plataforma de gestão financeira e patrimonial para pequenas e médias empresas em Moçambique. Organize receitas, despesas e património num só lugar.">
+<meta name="theme-color" content="#050C1F">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0A1128">
-<style>
-/* Paleta: altere apenas estas variáveis para ajustar a identidade visual */
-:root{--bg:#0A1128;--bg2:#0F1A3D;--card:#12214F;--line:#24367A;--text:#F3F5FC;--muted:#A3B0DA;--accent:#E8B84B;--accent2:#F4D27A;--blue:#2F4FDB;--ok:#35D0A0;--bad:#FF6B7A;
---safe-t:env(safe-area-inset-top,0px);--safe-b:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#0A1128}}
-*{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;scroll-padding-top:80px}
-body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6;padding-top:var(--safe-t);padding-bottom:var(--safe-b);-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
-.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:#fff;color:#000;padding:8px 12px;z-index:99}
-header{position:sticky;top:0;z-index:20;background:rgba(10,17,40,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
-.brand svg{width:28px;height:28px}
-nav ul{display:flex;gap:26px;list-style:none;padding:0}
-nav a{color:var(--muted);font-size:.93rem;transition:color .2s}nav a:hover{color:var(--text)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 26px;border-radius:12px;font-weight:600;font-size:.97rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0A1128;transition:transform .2s,box-shadow .2s;border:0;cursor:pointer}
-.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px var(--accent)}
-.btn.sm{padding:9px 18px;font-size:.88rem}
-.hero{padding:72px 0 56px;background:radial-gradient(700px 400px at 80% 0,rgba(47,79,219,.5),transparent 70%),radial-gradient(500px 300px at 0 30%,rgba(232,184,75,.10),transparent 70%)}
-.hero .wrap{display:grid;gap:48px;align-items:center}
-.tag{display:inline-block;font-size:.8rem;color:var(--muted);border:1px solid var(--line);padding:5px 12px;border-radius:99px;margin-bottom:18px}
-h1{font-size:clamp(2.1rem,6vw,3.6rem);line-height:1.1;letter-spacing:-.02em;margin-bottom:18px}
-h1 span,h2 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.lead{color:var(--muted);font-size:1.08rem;max-width:520px;margin-bottom:28px}
-/* dashboard */
-.dash{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
-.dots{display:flex;gap:6px;margin-bottom:14px}.dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
-.kpi{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:12px}
-.kpi small{color:var(--muted);font-size:.72rem;display:block}
-.kpi b{display:block;height:9px;border-radius:6px;margin-top:10px;width:70%}
-.kpi:nth-child(1) b{background:var(--ok)}.kpi:nth-child(2) b{background:var(--bad);width:50%}.kpi:nth-child(3) b{background:var(--accent);width:85%}
-.chart{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px}
-.chart small{color:var(--muted);font-size:.72rem}
-.bars{display:flex;align-items:flex-end;gap:8px;height:120px;margin-top:10px}
-.bars i{flex:1;border-radius:6px 6px 0 0;background:linear-gradient(var(--accent),var(--accent2));opacity:.85;transform-origin:bottom;animation:grow 1s ease both}
-.bars i.e{background:var(--line)}
-@keyframes grow{from{transform:scaleY(0)}}
-section{padding:80px 0}
-.eyebrow{color:var(--accent);font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
-h2{font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.15;letter-spacing:-.01em;margin-bottom:16px}
-.sub{color:var(--muted);max-width:640px}
-.alt{background:var(--bg2);border-block:1px solid var(--line)}
-.grid{display:grid;gap:16px;margin-top:40px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;transition:transform .25s,border-color .25s}
-.card:hover{transform:translateY(-4px);border-color:var(--accent)}
-.ico{width:42px;height:42px;border-radius:11px;background:rgba(232,184,75,.12);display:grid;place-items:center;margin-bottom:16px}
-.ico svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.card h3{font-size:1.05rem;margin-bottom:6px}.card p{color:var(--muted);font-size:.94rem}
-.pillars{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
-.pillars span{border:1px solid var(--line);border-radius:99px;padding:7px 16px;font-size:.9rem;color:var(--muted)}
-.ben{counter-reset:b}.ben .card{position:relative;padding-left:64px}
-.ben .card::before{counter-increment:b;content:"0" counter(b);position:absolute;left:22px;top:22px;font-weight:700;color:var(--accent)}
-.cta{text-align:center;background:radial-gradient(600px 260px at 50% 0,rgba(47,79,219,.45),transparent 70%)}
-.cta .sub{margin:0 auto 28px}
-footer{border-top:1px solid var(--line);padding:48px 0 28px;background:var(--bg2)}
-.foot{display:grid;gap:28px}
-.foot p{color:var(--muted);font-size:.92rem;max-width:380px;margin-top:12px}
-.soc{display:flex;gap:12px}
-.soc a{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;transition:border-color .2s,transform .2s}
-.soc a:hover{border-color:var(--accent);transform:translateY(-2px)}
-.soc svg{width:18px;height:18px;fill:var(--text)}
-.copy{margin-top:32px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.84rem}
-.wa{position:fixed;right:18px;bottom:calc(18px + var(--safe-b));width:52px;height:52px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.4);z-index:30;animation:pulse 3s ease-in-out infinite;transition:transform .2s}
-.wa:hover{transform:scale(1.08)}.wa svg{width:28px;height:28px;fill:#fff}
-@keyframes pulse{0%,100%{box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 0 0 rgba(37,211,102,.45)}50%{box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 0 12px rgba(37,211,102,0)}}
-.rv{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}.rv.on{opacity:1;transform:none}
-@media(max-width:759px){nav{display:none}}
-@media(min-width:760px){.hero .wrap{grid-template-columns:1.05fr 1fr}.grid.g3{grid-template-columns:repeat(3,1fr)}.grid.g2{grid-template-columns:repeat(2,1fr)}.foot{grid-template-columns:1fr auto;align-items:start}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
-</style>
+<meta property="og:title" content="Andrômeda | Gestão financeira e patrimonial">
+<meta property="og:description" content="Organize receitas, despesas e património numa única plataforma. Feita para empresas moçambicanas.">
+<meta property="og:locale" content="pt_MZ">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Schibsted+Grotesk:wght@500;600;700;800&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Andrômeda","description":"Plataforma de gestão financeira e patrimonial para empresas em Moçambique.","areaServed":"MZ","telephone":"+258849683266","sameAs":["https://www.instagram.com/andromeda.gf/","https://www.tiktok.com/@andrmeda.hq"]}
+</script>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<a class="skip" href="#main">Saltar para o conteúdo</a>
-<header>
-<div class="wrap nav">
-<a class="brand" href="#topo" aria-label="Andrômeda Gestão Financeira">
-<svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5B7CFF"/><stop offset="1" stop-color="#8E6BFF"/></linearGradient></defs><circle cx="16" cy="16" r="15" fill="#0F1A3D" stroke="#24367A"/><ellipse cx="16" cy="16" rx="12" ry="5" fill="none" stroke="#6F86E8" stroke-width="1" transform="rotate(-30 16 16)"/><ellipse cx="16" cy="16" rx="12" ry="5" fill="none" stroke="#6F86E8" stroke-width="1" transform="rotate(30 16 16)"/><path d="M16 5l2 9 9 2-9 2-2 9-2-9-9-2 9-2z" fill="#E8B84B"/></svg>
-Andrômeda</a>
-<nav aria-label="Principal"><ul><li><a href="#sobre">Sobre</a></li><li><a href="#funcionalidades">Funcionalidades</a></li><li><a href="#beneficios">Benefícios</a></li><li><a href="#para-quem">Para quem</a></li></ul></nav>
-<a class="btn sm" href="https://bit.ly/3U6mTHn">Aceder</a>
-</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Símbolo da marca: estrela dourada de quatro pontas, duas órbitas, corpos celestes. Para usar o ficheiro original, substitua este bloco por <image href="..."/>. -->
+    <symbol id="logo" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="48" fill="#0B1A3D"/>
+      <circle cx="50" cy="50" r="47" fill="none" stroke="#E6B53C" stroke-opacity=".35" stroke-width="1"/>
+      <ellipse cx="50" cy="50" rx="40" ry="15" transform="rotate(-25 50 50)" fill="none" stroke="#E6B53C" stroke-width="2"/>
+      <ellipse cx="50" cy="50" rx="40" ry="15" transform="rotate(25 50 50)" fill="none" stroke="#E6B53C" stroke-width="2"/>
+      <path d="M50 12C52 36 56 44 80 50C56 56 52 64 50 88C48 64 44 56 20 50C44 44 48 36 50 12Z" fill="#E6B53C"/>
+      <circle cx="86.3" cy="66.9" r="3.4" fill="#E6B53C"/>
+      <circle cx="13.7" cy="66.9" r="3.4" fill="#6B93FF"/>
+    </symbol>
+  </defs>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/><circle cx="16.5" cy="15" r="1"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-bars" viewBox="0 0 24 24"><path d="M5 20v-7M12 20V5M19 20v-10M3 20h18"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-9"/><path d="M15 6h6v6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-3.5-6.6L20 4l-1 3.8A8 8 0 0 1 20 12z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-.8.8c-.8-.3-1.7-1.2-2-2l.8-.8-1-2z"/></symbol>
+  <symbol id="i-wa-fill" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".7" fill="currentColor"/></symbol>
+  <symbol id="i-tt" viewBox="0 0 24 24"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2 4.200 4.500 4.400"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-in" viewBox="0 0 24 24"><path d="M17 7L7 17M15 17H7V9"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></symbol>
+</svg>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="site-header" id="top">
+  <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menu">
+    <svg class="ic"><use href="#i-gear"/></svg>
+  </button>
+  <nav class="nav-links" id="navLinks" aria-label="Principal">
+    <a href="#inicio">Início</a>
+    <a href="#funcionalidades">Funcionalidades</a>
+    <a href="#precos">Preços</a>
+    <a href="#sobre">Sobre nós</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
 </header>
-<main id="main">
-<section class="hero" id="topo">
-<div class="wrap">
-<div>
-<span class="tag">Gestão financeira e patrimonial</span>
-<h1>Gestão inteligente para empresas que querem <span>crescer.</span></h1>
-<p class="lead">Simplifica a gestão financeira e patrimonial do teu negócio. Organiza informações, acompanha resultados e toma decisões com mais confiança.</p>
-<a class="btn" href="https://bit.ly/3U6mTHn">Aceder à Andrômeda</a>
-</div>
-<div class="dash" role="img" aria-label="Painel financeiro da Andrômeda com indicadores de receitas, despesas e património">
-<div class="dots"><i></i><i></i><i></i></div>
-<div class="kpis"><div class="kpi"><small>Receitas</small><b></b></div><div class="kpi"><small>Despesas</small><b></b></div><div class="kpi"><small>Património</small><b></b></div></div>
-<div class="chart"><small>Desempenho financeiro</small>
-<div class="bars"><i style="height:40%"></i><i class="e" style="height:30%"></i><i style="height:55%"></i><i class="e" style="height:38%"></i><i style="height:48%"></i><i class="e" style="height:34%"></i><i style="height:70%"></i><i class="e" style="height:42%"></i><i style="height:85%"></i><i class="e" style="height:45%"></i></div></div>
-</div>
-</div>
+
+<main>
+<!-- 1. HERO -->
+<section class="hero" id="inicio" data-nav="inicio">
+  <svg class="stars" aria-hidden="true" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 800">
+    <g fill="#EAF0FF">
+      <circle cx="90" cy="120" r="1.4" opacity=".6"/><circle cx="260" cy="60" r="1" opacity=".5"/><circle cx="470" cy="150" r="1.2" opacity=".45"/>
+      <circle cx="640" cy="50" r="1" opacity=".5"/><circle cx="820" cy="110" r="1.5" opacity=".55"/><circle cx="1010" cy="70" r="1" opacity=".5"/>
+      <circle cx="1130" cy="210" r="1.3" opacity=".5"/><circle cx="60" cy="470" r="1.1" opacity=".4"/><circle cx="330" cy="700" r="1.3" opacity=".45"/>
+      <circle cx="760" cy="740" r="1" opacity=".5"/><circle cx="1090" cy="640" r="1.4" opacity=".5"/><circle cx="560" cy="770" r="1" opacity=".4"/>
+    </g>
+    <circle cx="150" cy="300" r="3" fill="#E6B53C" opacity=".85"/>
+  </svg>
+  <svg class="orbit" viewBox="0 0 900 900" aria-hidden="true">
+    <g class="spin">
+      <ellipse cx="450" cy="450" rx="400" ry="150" transform="rotate(-24 450 450)" fill="none" stroke="#E6B53C" stroke-opacity=".28" stroke-width="1.5"/>
+      <ellipse cx="450" cy="450" rx="320" ry="110" transform="rotate(30 450 450)" fill="none" stroke="#6B93FF" stroke-opacity=".22" stroke-width="1.2"/>
+      <circle cx="763" cy="313" r="6" fill="#E6B53C"/>
+      <circle cx="170" cy="560" r="4" fill="#6B93FF"/>
+    </g>
+  </svg>
+  <div class="wrap hero-brand"><a class="brand" href="#inicio" aria-label="Andrômeda, início"><svg class="logo-mark" aria-hidden="true"><use href="#logo"/></svg><span>Andrômeda</span></a></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Gestão financeira e patrimonial</p>
+      <h1>Assuma o controlo das finanças do <span class="gold">seu negócio.</span></h1>
+      <p class="lead">Organize receitas, despesas e património numa única plataforma. Tenha uma visão mais clara da sua empresa e tome decisões com confiança.</p>
+      <div class="cta-row">
+        <a class="btn btn-gold" href="#demonstracao">Conhecer a Andrômeda <svg class="ic"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-line" href="#contacto">Falar connosco</a>
+      </div>
+      <ul class="facts">
+        <li><svg class="ic"><use href="#i-pin"/></svg>Pensada para empresas moçambicanas</li>
+        <li><svg class="ic"><use href="#i-wallet"/></svg>Valores em Metical (MT)</li>
+        <li><svg class="ic"><use href="#i-shield"/></svg>Dados separados por empresa</li>
+      </ul>
+    </div>
+
+    <div class="hero-visual">
+      <div class="win" role="img" aria-label="Exemplo do painel da Andrômeda, com dados de demonstração">
+        <div class="win-bar">
+          <svg class="logo-mark" aria-hidden="true"><use href="#logo"/></svg>
+          <div><strong>Olá, Empresa Exemplo</strong><br><small>Resumo de novembro</small></div>
+          <span class="demo-badge">Dados de exemplo</span>
+        </div>
+        <div class="win-body">
+          <div class="kpis">
+            <div class="kpi"><span class="l">Saldo atual</span><b class="num">1.250.000 MT</b><em class="up">▲ 25%</em></div>
+            <div class="kpi"><span class="l">Receitas</span><b class="num">850.000 MT</b><em class="up">▲ 6,3%</em></div>
+            <div class="kpi"><span class="l">Despesas</span><b class="num">600.000 MT</b><em class="dn">▲ 1,7%</em></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>Evolução financeira</h3>
+              <div class="legend"><span><i style="background:var(--gold)"></i>Receitas</span><span><i style="background:var(--blue)"></i>Despesas</span></div>
+            </div>
+            <div class="chart" id="chart-hero" data-n="6" data-h="190"><svg aria-hidden="true"></svg><div class="tip"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone" aria-hidden="true">
+        <span class="hi">Olá, Empresa</span>
+        <small>Saldo atual</small>
+        <b class="num">1.250.000 <span>MT</span></b>
+        <em class="up">▲ 25%</em>
+        <svg class="spark" viewBox="0 0 120 44" preserveAspectRatio="none"><path d="M0 38 C14 36 20 30 32 32 S52 20 66 22 S92 10 120 4"/></svg>
+        <div class="act"><span>Receita</span><span>Despesa</span><span>Relatório</span></div>
+        <span class="pd">Dados de exemplo</span>
+      </div>
+      <div class="float">
+        <svg class="ic"><use href="#i-home"/></svg>
+        <div><small>Património total (exemplo)</small><b class="num">5.200.000 MT</b></div>
+      </div>
+    </div>
+    <div class="strip" aria-hidden="true"><div class="track"><span>Receitas</span><span>Despesas</span><span>Património</span><span>Impostos</span><span>Prazos</span><span>Relatórios</span><span>Fluxo de caixa</span><span>Análise com IA</span><span>Receitas</span><span>Despesas</span><span>Património</span><span>Impostos</span><span>Prazos</span><span>Relatórios</span><span>Fluxo de caixa</span><span>Análise com IA</span></div></div>
+  </div>
 </section>
 
-<section id="sobre" class="alt"><div class="wrap rv">
-<p class="eyebrow">Sobre a Andrômeda</p>
-<h2>Mais controlo. <span>Melhores decisões.</span></h2>
-<p class="sub">A Andrômeda é uma solução de gestão financeira e patrimonial criada para ajudar empresas a organizar os seus recursos, acompanhar o desempenho financeiro e melhorar a forma como gerem os seus negócios.</p>
-<div class="pillars"><span>Simplicidade</span><span>Organização</span><span>Eficiência</span><span>Clareza</span></div>
-</div></section>
+<!-- 2. PROBLEMAS -->
+<section class="sec on-light" id="problemas" data-nav="funcionalidades">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Problemas que resolvemos</p>
+      <h2>Transforme a forma como gere o seu negócio.</h2>
+      <p>Estes são os obstáculos que mais atrasam pequenas e médias empresas. Veja como a Andrômeda os resolve.</p>
+    </div>
+    <div class="prob-list">
+      <article class="prob">
+        <div class="prob-q"><span class="b"><svg class="ic"><use href="#i-alert"/></svg></span><h3>Falta de controlo sobre receitas e despesas</h3></div>
+        <svg class="ic prob-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+        <div class="prob-a"><svg class="ic"><use href="#i-check"/></svg><p><strong>Com a Andrômeda:</strong> cada entrada e saída fica registada e organizada por categoria, num único histórico.</p></div>
+      </article>
+      <article class="prob">
+        <div class="prob-q"><span class="b"><svg class="ic"><use href="#i-alert"/></svg></span><h3>Dificuldade em acompanhar o património</h3></div>
+        <svg class="ic prob-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+        <div class="prob-a"><svg class="ic"><use href="#i-check"/></svg><p><strong>Com a Andrômeda:</strong> os bens da empresa ficam listados com valor e data de aquisição, sempre à mão.</p></div>
+      </article>
+      <article class="prob">
+        <div class="prob-q"><span class="b"><svg class="ic"><use href="#i-alert"/></svg></span><h3>Desorganização financeira</h3></div>
+        <svg class="ic prob-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+        <div class="prob-a"><svg class="ic"><use href="#i-check"/></svg><p><strong>Com a Andrômeda:</strong> contas, pagamentos e recebimentos reunidos numa só plataforma, em vez de cadernos e papéis soltos.</p></div>
+      </article>
+      <article class="prob">
+        <div class="prob-q"><span class="b"><svg class="ic"><use href="#i-alert"/></svg></span><h3>Esquecimento de prazos e obrigações fiscais</h3></div>
+        <svg class="ic prob-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+        <div class="prob-a"><svg class="ic"><use href="#i-check"/></svg><p><strong>Com a Andrômeda:</strong> prazos e lembretes visíveis, para que nada passe despercebido.</p></div>
+      </article>
+      <article class="prob">
+        <div class="prob-q"><span class="b"><svg class="ic"><use href="#i-alert"/></svg></span><h3>Dificuldade em prever a disponibilidade financeira</h3></div>
+        <svg class="ic prob-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+        <div class="prob-a"><svg class="ic"><use href="#i-check"/></svg><p><strong>Com a Andrômeda:</strong> contas a pagar e a receber à vista e previsões de fluxo de caixa para saber o que vem a seguir.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
 
-<section id="funcionalidades"><div class="wrap">
-<p class="eyebrow rv">Funcionalidades</p>
-<h2 class="rv">Tudo o que precisas para acompanhar o teu negócio.</h2>
-<div class="grid g3">
-<article class="card rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div><h3>Gestão de receitas</h3><p>Acompanha as entradas financeiras da empresa.</p></article>
-<article class="card rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></div><h3>Gestão de despesas</h3><p>Organiza e categoriza os gastos do negócio.</p></article>
-<article class="card rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></div><h3>Gestão patrimonial</h3><p>Mantém maior controlo sobre os bens e recursos da empresa.</p></article>
-<article class="card rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h6M9 17h6"/></svg></div><h3>Gestão fiscal</h3><p>Acompanha informações e obrigações fiscais.</p></article>
-<article class="card rv"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Relatórios financeiros</h3><p>Consulta informações importantes para avaliar o desempenho.</p></article>
-<article class="card rv"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Controlo financeiro</h3><p>Acompanha a situação financeira do negócio.</p></article>
-</div></div></section>
+<!-- 3. FUNCIONALIDADES -->
+<section class="sec on-dark" id="funcionalidades" data-nav="funcionalidades">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Funcionalidades</p>
+      <h2>Uma solução completa para o seu negócio.</h2>
+      <p>Tudo o que precisa para organizar as finanças e acompanhar o património da empresa.</p>
+    </div>
+    <div class="feats">
+      <article class="feat w7">
+        <span class="fi"><svg class="ic"><use href="#i-wallet"/></svg></span>
+        <h3>Gestão de receitas e despesas</h3>
+        <p>Registe entradas e saídas, organize por categoria e consulte o histórico quando precisar.</p>
+        <div class="mv cols" aria-hidden="true"><i style="--h:38%"></i><i style="--h:52%"></i><i style="--h:46%"></i><i style="--h:68%"></i><i style="--h:60%"></i><i style="--h:84%"></i><i style="--h:100%"></i></div>
+      </article>
+      <article class="feat w5">
+        <span class="fi"><svg class="ic"><use href="#i-home"/></svg></span>
+        <h3>Gestão patrimonial</h3>
+        <p>Acompanhe os bens da empresa com o respetivo valor e data de aquisição.</p>
+        <div class="mv rows" aria-hidden="true">
+          <div>Imóveis<span class="bar"><i style="width:80%"></i></span></div>
+          <div>Viaturas<span class="bar"><i style="width:48%"></i></span></div>
+          <div>Equipamentos<span class="bar"><i style="width:30%"></i></span></div>
+        </div>
+      </article>
+      <article class="feat"><span class="fi"><svg class="ic"><use href="#i-receipt"/></svg></span><h3>Controlo de impostos e obrigações fiscais</h3><p>Tenha à vista o que a empresa deve cumprir e quando.</p></article>
+      <article class="feat"><span class="fi"><svg class="ic"><use href="#i-cal"/></svg></span><h3>Gestão de prazos e lembretes</h3><p>Lembretes de pagamentos, recebimentos e prazos importantes.</p></article>
+      <article class="feat"><span class="fi"><svg class="ic"><use href="#i-bars"/></svg></span><h3>Relatórios financeiros inteligentes</h3><p>Resumos mensais e evolução do saldo, prontos a consultar e exportar.</p></article>
+      <article class="feat w6"><span class="fi"><svg class="ic"><use href="#i-trend"/></svg></span><h3>Previsões de fluxo de caixa</h3><p>Antecipe a disponibilidade financeira dos próximos meses.</p><svg class="mv fc" viewBox="0 0 240 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 46 C30 44 50 38 80 36 S120 26 140 24" fill="none" stroke="#E6B53C" stroke-width="2.4" stroke-linecap="round"/><path d="M140 24 C170 20 200 12 240 6" fill="none" stroke="#E6B53C" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="5 6" opacity=".7"/></svg></article>
+      <article class="feat w6"><span class="fi"><svg class="ic"><use href="#i-spark"/></svg></span><h3>Análise financeira assistida por IA</h3><p>Perceba o que mudou nas contas, em linguagem simples.</p><div class="mv chip"><svg class="ic"><use href="#i-spark"/></svg><span>As receitas subiram 6,3% face a outubro. A maior despesa foi operacional.</span></div></article>
+    </div>
+  </div>
+</section>
 
-<section id="beneficios" class="alt"><div class="wrap">
-<p class="eyebrow rv">Benefícios</p>
-<h2 class="rv">A tua empresa merece uma gestão <span>mais organizada.</span></h2>
-<div class="grid g2 ben">
-<div class="card rv"><h3>Maior controlo</h3><p>Sobre receitas e despesas.</p></div>
-<div class="card rv"><h3>Melhor organização</h3><p>Das informações financeiras.</p></div>
-<div class="card rv"><h3>Mais clareza</h3><p>Para acompanhar o desempenho do negócio.</p></div>
-<div class="card rv"><h3>Decisões mais conscientes</h3><p>Apoio a decisões financeiras mais conscientes.</p></div>
-</div></div></section>
+<!-- 4. DEMONSTRAÇÃO -->
+<section class="sec on-deep" id="demonstracao" data-nav="funcionalidades">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Veja a plataforma</p>
+      <h2>O painel que mostra a saúde financeira da sua empresa.</h2>
+      <p>Saldo, receitas, despesas, património e movimentos recentes numa única vista. Passe o rato (ou toque) no gráfico para ver cada mês.</p>
+    </div>
 
-<section id="para-quem"><div class="wrap">
-<p class="eyebrow rv">Para quem é</p>
-<h2 class="rv">Pensada para quem faz o negócio avançar.</h2>
-<div class="grid g2">
-<div class="card rv"><h3>Pequenas e médias empresas</h3></div>
-<div class="card rv"><h3>Empreendedores</h3></div>
-<div class="card rv"><h3>Gestores</h3></div>
-<div class="card rv"><h3>Negócios em busca de organização</h3><p>Que procuram melhorar a sua organização financeira e patrimonial.</p></div>
-</div></div></section>
+    <div class="app" role="group" aria-label="Demonstração do painel da Andrômeda">
+      <aside class="side" aria-hidden="true">
+        <div class="brand"><svg class="logo-mark"><use href="#logo"/></svg><span>Andrômeda</span></div>
+        <ul>
+          <li class="on"><svg class="ic"><use href="#i-grid"/></svg>Painel</li>
+          <li><svg class="ic"><use href="#i-list"/></svg>Transações</li>
+          <li><svg class="ic"><use href="#i-home"/></svg>Património</li>
+          <li><svg class="ic"><use href="#i-receipt"/></svg>Impostos</li>
+          <li><svg class="ic"><use href="#i-bars"/></svg>Relatórios</li>
+          <li><svg class="ic"><use href="#i-gear"/></svg>Definições</li>
+        </ul>
+        <div class="user">Empresa Exemplo, Lda.</div>
+      </aside>
 
-<section class="cta alt"><div class="wrap rv">
-<h2>O próximo passo para uma gestão mais inteligente <span>começa aqui.</span></h2>
-<p class="sub">Organiza os números do teu negócio e transforma informação em decisões.</p>
-<a class="btn" href="https://bit.ly/3U6mTHn">Começar a utilizar</a>
-</div></section>
+      <div class="main">
+        <div class="main-head">
+          <h3>Olá, Empresa Exemplo <small>Aqui está o resumo do seu negócio em novembro.</small></h3>
+          <span class="demo-badge">Dados de exemplo</span>
+        </div>
+
+        <div class="g12">
+          <div class="kpi k"><span class="l">Saldo atual</span><b class="num">1.250.000 MT</b><em class="up">▲ 25% face ao mês anterior</em></div>
+          <div class="kpi k"><span class="l">Total de receitas</span><b class="num">850.000 MT</b><em class="up">▲ 6,3%</em></div>
+          <div class="kpi k"><span class="l">Total de despesas</span><b class="num">600.000 MT</b><em class="dn">▲ 1,7%</em></div>
+          <div class="kpi k"><span class="l">Património total</span><b class="num">5.200.000 MT</b><em class="up">▲ 2,0%</em></div>
+        </div>
+
+        <div class="g12">
+          <div class="card s8">
+            <div class="card-head">
+              <h3>Evolução financeira</h3>
+              <div class="seg" role="group" aria-label="Período do gráfico">
+                <button type="button" data-n="3" aria-pressed="false">3 meses</button>
+                <button type="button" data-n="6" aria-pressed="true">6 meses</button>
+                <button type="button" data-n="12" aria-pressed="false">12 meses</button>
+              </div>
+              <div class="legend"><span><i style="background:var(--gold)"></i>Receitas</span><span><i style="background:var(--blue)"></i>Despesas</span></div>
+            </div>
+            <div class="chart" id="chart-demo" data-n="6" data-h="280"><svg aria-hidden="true"></svg><div class="tip"></div></div>
+          </div>
+
+          <div class="card s4">
+            <div class="card-head"><h3>Distribuição de despesas</h3></div>
+            <div class="donut-wrap">
+              <div class="donut">
+                <svg viewBox="0 0 42 42" aria-hidden="true">
+                  <circle cx="21" cy="21" r="15.9155" stroke="var(--gold)" stroke-dasharray="49.2 50.8" stroke-dashoffset="25"/>
+                  <circle cx="21" cy="21" r="15.9155" stroke="var(--blue)" stroke-dasharray="29.2 70.8" stroke-dashoffset="75"/>
+                  <circle cx="21" cy="21" r="15.9155" stroke="var(--mist)" stroke-dasharray="11.2 88.8" stroke-dashoffset="45"/>
+                  <circle cx="21" cy="21" r="15.9155" stroke="var(--steel)" stroke-dasharray="7.2 92.8" stroke-dashoffset="33"/>
+                </svg>
+                <div class="ctr"><b class="num">600.000 MT</b><small>no mês</small></div>
+              </div>
+              <ul class="dl num">
+                <li><i style="background:var(--gold)"></i>Operacional<span class="v">50%</span></li>
+                <li><i style="background:var(--blue)"></i>Pessoal<span class="v">30%</span></li>
+                <li><i style="background:var(--mist)"></i>Impostos<span class="v">12%</span></li>
+                <li><i style="background:var(--steel)"></i>Outros<span class="v">8%</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card s8">
+            <div class="card-head"><h3>Últimas transações</h3></div>
+            <ul class="tx num">
+              <li class="in"><span class="ti"><svg class="ic"><use href="#i-in"/></svg></span><div><p>Venda de serviços</p><small>Receita · 17 Nov</small></div><span class="amt up">+250.000 MT</span></li>
+              <li class="out"><span class="ti"><svg class="ic"><use href="#i-out"/></svg></span><div><p>Pagamento a fornecedor</p><small>Despesa operacional · 16 Nov</small></div><span class="amt dn">−120.000 MT</span></li>
+              <li class="in"><span class="ti"><svg class="ic"><use href="#i-in"/></svg></span><div><p>Venda de produtos</p><small>Receita · 12 Nov</small></div><span class="amt up">+180.000 MT</span></li>
+              <li class="out"><span class="ti"><svg class="ic"><use href="#i-out"/></svg></span><div><p>Renda do escritório</p><small>Despesa operacional · 10 Nov</small></div><span class="amt dn">−45.000 MT</span></li>
+              <li class="out"><span class="ti"><svg class="ic"><use href="#i-out"/></svg></span><div><p>Conta de eletricidade<span class="tag">A pagar</span></p><small>Despesa operacional · vence em 20 Nov</small></div><span class="amt dn">−8.500 MT</span></li>
+            </ul>
+          </div>
+
+          <div class="card s4">
+            <div class="card-head"><h3>Património total</h3></div>
+            <div class="big num">5.200.000 MT</div>
+            <div class="bars num">
+              <div class="bar-row"><div class="t"><span>Imóveis</span><span>3.200.000 MT</span></div><div class="bar"><i style="width:61.5%"></i></div></div>
+              <div class="bar-row"><div class="t"><span>Viaturas</span><span>1.200.000 MT</span></div><div class="bar"><i style="width:23.1%"></i></div></div>
+              <div class="bar-row"><div class="t"><span>Equipamentos</span><span>800.000 MT</span></div><div class="bar"><i style="width:15.4%"></i></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-note">
+      <p>Os valores desta demonstração são exemplos criados para ilustrar a plataforma. Não representam resultados de clientes.</p>
+      <a class="btn btn-gold" href="#contacto">Falar com a equipa <svg class="ic"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- 5. BENEFÍCIOS -->
+<section class="sec on-light" id="beneficios" data-nav="funcionalidades">
+  <div class="wrap ben-grid">
+    <div class="ben-art">
+      <p class="eyebrow">Benefícios</p>
+      <h2>Por que escolher a Andrômeda?</h2>
+      <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#logo"/></svg>
+    </div>
+    <div class="ben-list">
+      <div class="ben"><span class="bi"><svg class="ic"><use href="#i-layers"/></svg></span><div><h3>Mais organização financeira</h3><p>Tudo registado num só lugar, por categoria.</p></div></div>
+      <div class="ben"><span class="bi"><svg class="ic"><use href="#i-home"/></svg></span><div><h3>Maior controlo sobre o património</h3><p>Saiba o que a empresa possui e quanto vale.</p></div></div>
+      <div class="ben"><span class="bi"><svg class="ic"><use href="#i-receipt"/></svg></span><div><h3>Melhor acompanhamento das obrigações fiscais</h3><p>Prazos e lembretes sempre visíveis.</p></div></div>
+      <div class="ben"><span class="bi"><svg class="ic"><use href="#i-bulb"/></svg></span><div><h3>Decisões baseadas em informação</h3><p>Relatórios claros no lugar de palpites.</p></div></div>
+      <div class="ben"><span class="bi"><svg class="ic"><use href="#i-clock"/></svg></span><div><h3>Economia de tempo</h3><p>Menos tempo a procurar papéis e a somar contas.</p></div></div>
+      <div class="ben"><span class="bi"><svg class="ic"><use href="#i-eye"/></svg></span><div><h3>Visão integrada da situação financeira</h3><p>Receitas, despesas e bens vistos em conjunto.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. PLANOS -->
+<section class="sec on-dark" id="precos" data-nav="precos">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Planos e preços</p>
+      <h2>Escolha o plano ideal para o seu negócio.</h2>
+      <p>Três opções para acompanhar o crescimento da empresa. Os valores são confirmados diretamente com a equipa.</p>
+    </div>
+    <div class="plans">
+      <article class="plan">
+        <div><h3>Essencial</h3><p class="for">Para pequenos negócios que querem organizar as contas.</p></div>
+        <p class="price" data-price="essencial">Contactar para obter preços</p>
+        <ul>
+          <li><svg class="ic"><use href="#i-check"/></svg>Registo de receitas e despesas</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Contas a pagar e a receber</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Registo dos bens da empresa</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Relatórios básicos</li>
+        </ul>
+        <a class="btn btn-line" href="#contacto" data-plan="Essencial">Falar sobre este plano</a>
+      </article>
+      <article class="plan hl">
+        <span class="rec">Recomendado</span>
+        <div><h3>Profissional</h3><p class="for">Para negócios em crescimento que precisam de mais controlo.</p></div>
+        <p class="price" data-price="profissional">Contactar para obter preços</p>
+        <ul>
+          <li class="dim"><svg class="ic"><use href="#i-check"/></svg>Tudo do plano Essencial</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Controlo de impostos e obrigações fiscais</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Prazos e lembretes</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Relatórios financeiros mais completos</li>
+        </ul>
+        <a class="btn btn-gold" href="#contacto" data-plan="Profissional">Falar sobre este plano</a>
+      </article>
+      <article class="plan">
+        <div><h3>Empresarial</h3><p class="for">Para empresas com necessidades mais complexas.</p></div>
+        <p class="price" data-price="empresarial">Contactar para obter preços</p>
+        <ul>
+          <li class="dim"><svg class="ic"><use href="#i-check"/></svg>Tudo do plano Profissional</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Previsões de fluxo de caixa e análise financeira com IA</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Configuração ajustada à empresa</li>
+        </ul>
+        <a class="btn btn-line" href="#contacto" data-plan="Empresarial">Falar sobre este plano</a>
+      </article>
+    </div>
+    <p class="plan-note">Fale connosco para saber qual plano se adapta melhor ao seu negócio.</p>
+  </div>
+</section>
+
+<!-- 7. SOBRE NÓS -->
+<section class="sec on-light" id="sobre" data-nav="sobre">
+  <div class="wrap about">
+    <div class="about-copy">
+      <p class="eyebrow">Sobre nós</p>
+      <h2>Feita a pensar nas empresas moçambicanas.</h2>
+      <p>A Andrômeda nasceu para responder a uma necessidade concreta: ajudar empresas e empreendedores a organizar as finanças, acompanhar o património e decidir com base em informação, e não em palpites.</p>
+      <p>Desenvolvemos a solução com foco na realidade do mercado local, com valores em Metical e uma forma de trabalhar simples, próxima de quem gere um negócio no dia a dia.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar"><span class="bi"><svg class="ic"><use href="#i-pin"/></svg></span><div><h3>Proximidade com o mercado local</h3><p>Pensada para a realidade e para as necessidades dos negócios em Moçambique.</p></div></div>
+      <div class="pillar"><span class="bi"><svg class="ic"><use href="#i-spark"/></svg></span><div><h3>Inovação com utilidade</h3><p>Tecnologia ao serviço das tarefas financeiras do dia a dia.</p></div></div>
+      <div class="pillar"><span class="bi"><svg class="ic"><use href="#i-layers"/></svg></span><div><h3>Compromisso com a organização</h3><p>Cada empresa com as suas contas e o seu património em ordem.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. CONTACTO -->
+<section class="sec on-deep" id="contacto" data-nav="contacto">
+  <div class="wrap contact">
+    <div class="contact-copy">
+      <p class="eyebrow">Contacto</p>
+      <h2>Comece a organizar as finanças do seu negócio.</h2>
+      <p class="lead">Fale connosco e descubra como a Andrômeda pode ajudar a sua empresa.</p>
+      <ol class="steps" aria-label="Como começar">
+        <li><span class="n">1</span><div><b>Fale connosco</b><span class="d">Por WhatsApp, redes sociais ou pelo formulário.</span></div></li>
+        <li><span class="n">2</span><div><b>Conhecemos o seu negócio</b><span class="d">Percebemos como gere as finanças hoje e indicamos o plano mais adequado.</span></div></li>
+        <li><span class="n">3</span><div><b>Comece a organizar</b><span class="d">Registe receitas, despesas e bens numa só plataforma.</span></div></li>
+      </ol>
+      <div class="chan">
+        <a class="btn btn-gold" data-wa><svg class="ic fill"><use href="#i-wa-fill"/></svg><span class="lbl">Falar pelo WhatsApp</span></a>
+        <a class="btn btn-line" data-tt><svg class="ic"><use href="#i-tt"/></svg>@andrmeda.hq no TikTok</a>
+        <a class="btn btn-line" data-ig><svg class="ic"><use href="#i-ig"/></svg>@andromeda.gf no Instagram</a>
+      </div>
+      <p class="phone-num">WhatsApp <b>+258 84 968 3266</b></p>
+    </div>
+
+    <form class="form" id="form" novalidate>
+      <h3>Envie-nos uma mensagem</h3>
+      <div class="row2">
+        <div class="f"><label for="f-nome">Nome</label><input id="f-nome" name="nome" autocomplete="name" required></div>
+        <div class="f"><label for="f-empresa">Empresa</label><input id="f-empresa" name="empresa" autocomplete="organization"></div>
+      </div>
+      <div class="f"><label for="f-contacto">Telemóvel ou email</label><input id="f-contacto" name="contacto" autocomplete="off" required></div>
+      <div class="f"><label for="f-plano">Plano de interesse</label>
+        <select id="f-plano" name="plano">
+          <option>Ainda não sei</option><option>Essencial</option><option>Profissional</option><option>Empresarial</option>
+        </select>
+      </div>
+      <div class="f"><label for="f-msg">Mensagem</label><textarea id="f-msg" name="mensagem" rows="4" placeholder="Conte-nos um pouco sobre o seu negócio."></textarea></div>
+      <button class="btn btn-gold" type="submit">Enviar pedido <svg class="ic"><use href="#i-arrow"/></svg></button>
+      <div id="form-out" class="out" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
 </main>
 
-<footer>
-<div class="wrap">
-<div class="foot">
-<div>
-<div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#0F1A3D" stroke="#24367A"/><ellipse cx="16" cy="16" rx="12" ry="5" fill="none" stroke="#6F86E8" stroke-width="1" transform="rotate(-30 16 16)"/><ellipse cx="16" cy="16" rx="12" ry="5" fill="none" stroke="#6F86E8" stroke-width="1" transform="rotate(30 16 16)"/><path d="M16 5l2 9 9 2-9 2-2 9-2-9-9-2 9-2z" fill="#E8B84B"/></svg>Andrômeda Gestão Financeira</div>
-<p>Solução de gestão financeira e patrimonial para empresas em Moçambique.</p>
-</div>
-<div class="soc">
-<a href="https://www.instagram.com/andromeda.gf" target="_blank" rel="noopener" aria-label="Instagram da Andrômeda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="fill:none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#EAEEFB"/><circle cx="12" cy="12" r="4" stroke="#EAEEFB"/><circle cx="17.3" cy="6.7" r=".6" stroke="#EAEEFB" fill="#EAEEFB"/></svg></a>
-<a href="https://www.linkedin.com/in/andr%C3%B4meda-gest%C3%A3o-financeira-11aba1447" target="_blank" rel="noopener" aria-label="LinkedIn da Andrômeda"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-<a href="https://www.tiktok.com/@andrmeda.hq" target="_blank" rel="noopener" aria-label="TikTok da Andrômeda"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
-</div>
-</div>
-<p class="copy">© 2026 Andrômeda. Todos os direitos reservados.</p>
-</div>
+<footer class="foot">
+  <div class="wrap foot-in">
+    <a class="brand" href="#inicio"><svg class="logo-mark" aria-hidden="true"><use href="#logo"/></svg><span>Andrômeda</span></a>
+    <p>Gestão financeira e patrimonial. Feita em Moçambique.</p>
+    <nav aria-label="Rodapé">
+      <a href="#inicio">Início</a><a href="#funcionalidades">Funcionalidades</a><a href="#precos">Preços</a><a href="#sobre">Sobre nós</a><a href="#contacto">Contacto</a>
+    </nav>
+    <div class="soc-row">
+      <a class="soc" data-ig><svg class="ic"><use href="#i-ig"/></svg>Instagram</a>
+      <a class="soc" data-tt><svg class="ic"><use href="#i-tt"/></svg>TikTok</a>
+    </div>
+    <p class="copy">© 2026 Andrômeda. Todos os direitos reservados.</p>
+  </div>
 </footer>
 
-<a class="wa" href="https://bit.ly/4zQiyHl" target="_blank" rel="noopener" aria-label="Falar com a Andrômeda no WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+<a class="fab" data-wa aria-label="Falar pelo WhatsApp"><svg class="ic fill" aria-hidden="true"><use href="#i-wa-fill"/></svg><span class="fab-label">Fale connosco</span></a>
 
-<script>
-(function(){var els=document.querySelectorAll('.rv');
-if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('on')});return}
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.12});
-els.forEach(function(e){io.observe(e)})})();
-</script>
+<script src="script.js" defer></script>
 </body>
 </html>
